@@ -11,6 +11,11 @@ public class Caixa {
     public Caixa() {
     }
 
+    public void main(){
+        String menuCaixa = "1. Criar conta\n2. Login\n0. Sair";
+        String menuConta = "1. Sacar\n2. Depositar\n3. Ver saldo\n4. PIX\n0. Sair";
+    }
+
     public void pix(){
         //todo
     }
