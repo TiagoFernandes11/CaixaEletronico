@@ -14,6 +14,29 @@ public class Caixa {
     public void main() {
         String menuCaixa = "1. Criar conta\n2. Login\n0. Sair";
         String menuConta = "1. Sacar\n2. Depositar\n3. Ver saldo\n4. PIX\n0. Sair";
+
+        Scanner scanner = new Scanner(System.in);
+        int resp = -1;
+
+        while (resp != 0) {
+            System.out.println(menuCaixa);
+            scanner.nextInt();
+            switch (resp) {
+                case 1:
+                    System.out.println("criar todo");
+                    break;
+                case 2:
+                    System.out.println("login todo");
+                    System.out.println(menuConta);
+                    break;
+                case 0:
+                    System.out.println("sair todo:");
+                    break;
+            }
+        }
+
+        scanner.close();
+
     }
 
     public void pix(String emailDestinatario, Double valorPix) {
