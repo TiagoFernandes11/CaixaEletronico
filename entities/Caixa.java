@@ -11,13 +11,29 @@ public class Caixa {
     public Caixa() {
     }
 
-    public void main(){
+    public void main() {
         String menuCaixa = "1. Criar conta\n2. Login\n0. Sair";
         String menuConta = "1. Sacar\n2. Depositar\n3. Ver saldo\n4. PIX\n0. Sair";
     }
 
-    public void pix(){
-        //todo
+    public void pix(String emailDestinatario, Double valorPix) {
+        if (emailExiste(emailDestinatario) && this.logado && this.contaCliente.getSaldo() < valorPix) {
+            for (int i = 0; i < this.contas.length; i++) {
+                if (emailDestinatario.equals(this.contas[i].getEmail())) {
+                    this.contaCliente.setSaldo(this.contaCliente.getSaldo() - valorPix);
+                    this.contas[i].setSaldo(this.contas[i].getSaldo() + valorPix);
+                }
+            }
+        }
+    }
+
+    public boolean emailExiste(String email) {
+        for (int i = 0; i < this.contas.length; i++) {
+            if (email.equals(this.contas[i].getEmail())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void sacar() {
