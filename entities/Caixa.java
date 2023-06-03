@@ -3,40 +3,45 @@ package entities;
 import java.util.Scanner;
 
 public class Caixa {
-    private Conta[] contas = new Conta[5];
+    private Conta[] contas = new Conta[10];
     private int tamanhoContas = 0;
     private Conta contaCliente;
     private boolean logado = false;
 
     public Caixa() {
+        this.contas[0] = new Conta("exemp@exemp.com", "123", 1000);
+        this.contas[1] = new Conta("exemp@exemp.com", "123", 1000);
+        this.contas[2] = new Conta("exemp@exemp.com", "123", 1000);
+        this.contas[3] = new Conta("exemp@exemp.com", "123", 1000);
+        this.contas[4] = new Conta("exemp@exemp.com", "123", 1000);
     }
 
     public void main() {
-        String menuCaixa = "1. Criar conta\n2. Login\n0. Sair";
         String menuConta = "1. Sacar\n2. Depositar\n3. Ver saldo\n4. PIX\n0. Sair";
-
         Scanner scanner = new Scanner(System.in);
         int resp = -1;
-
         while (resp != 0) {
-            System.out.println(menuCaixa);
+            System.out.println(menuConta);
             scanner.nextInt();
             switch (resp) {
                 case 1:
-                    System.out.println("criar todo");
+                    this.logar();
                     break;
                 case 2:
-                    System.out.println("login todo");
-                    System.out.println(menuConta);
+                    System.out.println("depositar todo");
+                    break;
+                case 3:
+                    System.out.println("ver saldo todo:");
+                    break;
+                case 4:
+                    System.out.println("todo pix");
                     break;
                 case 0:
-                    System.out.println("sair todo:");
+                    System.out.println("break dos breaks todo");
                     break;
             }
         }
-
         scanner.close();
-
     }
 
     public void pix(String emailDestinatario, Double valorPix) {
@@ -92,7 +97,7 @@ public class Caixa {
         autenticar(email, senha);
     }
 
-    public void autenticar(String email, String senha) {
+    private void autenticar(String email, String senha) {
         for (int i = 0; i < this.contas.length; i++) {
             if (email.equals(contas[i].getEmail()) && senha.equals(contas[i].getSenha())) {
                 this.contaCliente = contas[i];
@@ -137,7 +142,7 @@ public class Caixa {
     }
 
     private void aumentaCapacidade() {
-        Conta[] temp = new Conta[this.contas.length + 1];
+        Conta[] temp = new Conta[this.contas.length + 5];
         for (int i = 0; i < this.contas.length; i++) {
             temp[i] = contas[i];
         }
