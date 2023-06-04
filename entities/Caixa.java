@@ -17,27 +17,26 @@ public class Caixa {
     }
 
     public void main() {
+        String menuCaixa = "1. Criar conta\n2. Login\n0. Sair";
         String menuConta = "1. Sacar\n2. Depositar\n3. Ver saldo\n4. PIX\n0. Sair";
         Scanner scanner = new Scanner(System.in);
         int resp = -1;
         while (resp != 0) {
-            System.out.println(menuConta);
-            scanner.nextInt();
+            System.out.println(menuCaixa);
+            resp = scanner.nextInt();
             switch (resp) {
                 case 1:
-                    this.logar();
+                    this.cadastrarConta();
                     break;
-                case 2:
-                    System.out.println("depositar todo");
-                    break;
-                case 3:
-                    System.out.println("ver saldo todo:");
-                    break;
-                case 4:
-                    System.out.println("todo pix");
-                    break;
-                case 0:
-                    System.out.println("break dos breaks todo");
+                case 2: 
+                    if(this.logar()){
+                        while(resp != 0){
+                            System.out.println(menuConta);
+                            switch(resp){
+                                //todo
+                            }
+                        }
+                    };
                     break;
             }
         }
@@ -88,24 +87,25 @@ public class Caixa {
         }
     }
 
-    public void logar() {
+    public boolean logar() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Email:");
         String email = sc.nextLine();
         System.out.println("Senha: ");
         String senha = sc.nextLine();
-        autenticar(email, senha);
+        return autenticar(email, senha);
     }
 
-    private void autenticar(String email, String senha) {
+    private boolean autenticar(String email, String senha) {
         for (int i = 0; i < this.contas.length; i++) {
             if (email.equals(contas[i].getEmail()) && senha.equals(contas[i].getSenha())) {
                 this.contaCliente = contas[i];
                 this.logado = true;
                 System.out.println("Logado com sucesso!");
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public void depositar() {
@@ -125,7 +125,7 @@ public class Caixa {
         verSaldo();
     }
 
-    public Conta criarConta() {
+    private Conta criarConta() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Email:");
         String email = sc.nextLine();
