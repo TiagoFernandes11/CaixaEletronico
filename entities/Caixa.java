@@ -9,11 +9,11 @@ public class Caixa {
     private boolean logado = false;
 
     public Caixa() {
-        this.contas[0] = new Conta("exemp@exemp.com", "123", 1000);
-        this.contas[1] = new Conta("exemp@exemp.com", "123", 1000);
-        this.contas[2] = new Conta("exemp@exemp.com", "123", 1000);
-        this.contas[3] = new Conta("exemp@exemp.com", "123", 1000);
-        this.contas[4] = new Conta("exemp@exemp.com", "123", 1000);
+        this.contas[0] = new Conta("exemp1@exemp.com", "123", 1000);
+        this.contas[1] = new Conta("exemp2@exemp.com", "123", 1000);
+        this.contas[2] = new Conta("exemp3@exemp.com", "123", 1000);
+        this.contas[3] = new Conta("exemp4@exemp.com", "123", 1000);
+        this.contas[4] = new Conta("exemp5@exemp.com", "123", 1000);
     }
 
     public void main() {
@@ -28,19 +28,43 @@ public class Caixa {
                 case 1:
                     this.cadastrarConta();
                     break;
-                case 2: 
-                    if(this.logar()){
-                        while(resp != 0){
+                case 2:
+                    if (this.logar()) {
+                        while (resp != 0) {
                             System.out.println(menuConta);
-                            switch(resp){
-                                //todo
+                            switch (resp) {
+                                case 1:
+                                    sacar();
+                                    break;
+                                case 2:
+                                    depositar();
+                                    break;
+                                case 3:
+                                    verSaldo();
+                                    break;
+                                case 4:
+                                    efetuarPix();
+                                    break;
                             }
                         }
-                    };
+                        this.logado = false;
+                        this.contaCliente = null;
+                        resp = -1;
+                    }
+                    ;
                     break;
             }
         }
         scanner.close();
+    }
+
+    public void efetuarPix() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Email destinatario: ");
+        String emailDestinatario = sc.nextLine();
+        System.out.println("Valor da transferencia: ");
+        Double valorPix = sc.nextDouble();
+        pix(emailDestinatario, valorPix);
     }
 
     public void pix(String emailDestinatario, Double valorPix) {
