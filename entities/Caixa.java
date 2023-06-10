@@ -32,6 +32,7 @@ public class Caixa {
                     if (this.logar()) {
                         while (resp != 0) {
                             System.out.println(menuConta);
+                            resp = scanner.nextInt();
                             switch (resp) {
                                 case 1:
                                     sacar();
@@ -67,7 +68,7 @@ public class Caixa {
         pix(emailDestinatario, valorPix);
     }
 
-    public void pix(String emailDestinatario, Double valorPix) {
+    private void pix(String emailDestinatario, Double valorPix) {
         if (emailExiste(emailDestinatario) && this.logado && this.contaCliente.getSaldo() < valorPix) {
             for (int i = 0; i < this.contas.length; i++) {
                 if (emailDestinatario.equals(this.contas[i].getEmail())) {
