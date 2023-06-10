@@ -60,11 +60,11 @@ public class Caixa {
     }
 
     public void efetuarPix() {
-        Scanner sc = new Scanner(System.in);
+        Scanner pixScanner = new Scanner(System.in);
         System.out.println("Email destinatario: ");
-        String emailDestinatario = sc.nextLine();
+        String emailDestinatario = pixScanner.nextLine();
         System.out.println("Valor da transferencia: ");
-        Double valorPix = sc.nextDouble();
+        Double valorPix = pixScanner.nextDouble();
         pix(emailDestinatario, valorPix);
     }
 
@@ -74,6 +74,8 @@ public class Caixa {
                 if (emailDestinatario.equals(this.contas[i].getEmail())) {
                     this.contaCliente.setSaldo(this.contaCliente.getSaldo() - valorPix);
                     this.contas[i].setSaldo(this.contas[i].getSaldo() + valorPix);
+                    System.out.println("Pix realizado!");
+                    verSaldo();
                 }
             }
         }
