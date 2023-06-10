@@ -60,12 +60,13 @@ public class Caixa {
     }
 
     public void efetuarPix() {
-        Scanner pixScanner = new Scanner(System.in);
-        System.out.println("Email destinatario: ");
-        String emailDestinatario = pixScanner.nextLine();
-        System.out.println("Valor da transferencia: ");
-        Double valorPix = pixScanner.nextDouble();
-        pix(emailDestinatario, valorPix);
+        try (Scanner pixScanner = new Scanner(System.in)) {
+            System.out.println("Email destinatario: ");
+            String emailDestinatario = pixScanner.nextLine();
+            System.out.println("Valor da transferencia: ");
+            Double valorPix = pixScanner.nextDouble();
+            pix(emailDestinatario, valorPix);
+        }
     }
 
     private void pix(String emailDestinatario, Double valorPix) {
@@ -95,14 +96,15 @@ public class Caixa {
             System.out.println("Você precisa estar logado! ");
             return;
         }
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Qual valor do saque: ");
-        Double valor = sc.nextDouble();
-        if (this.contaCliente.getSaldo() < valor) {
-            System.out.println("Saldo insuficiente");
-            return;
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Qual valor do saque: ");
+            Double valor = sc.nextDouble();
+            if (this.contaCliente.getSaldo() < valor) {
+                System.out.println("Saldo insuficiente");
+                return;
+            }
+            this.contaCliente.setSaldo(this.contaCliente.getSaldo() - valor);
         }
-        this.contaCliente.setSaldo(this.contaCliente.getSaldo() - valor);
         verSaldo();
     }
 
@@ -115,12 +117,13 @@ public class Caixa {
     }
 
     public boolean logar() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Email:");
-        String email = sc.nextLine();
-        System.out.println("Senha: ");
-        String senha = sc.nextLine();
-        return autenticar(email, senha);
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Email:");
+            String email = sc.nextLine();
+            System.out.println("Senha: ");
+            String senha = sc.nextLine();
+            return autenticar(email, senha);
+        }
     }
 
     private boolean autenticar(String email, String senha) {
@@ -140,25 +143,27 @@ public class Caixa {
             System.out.println("Você precisa estar logado! ");
             return;
         }
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Qual valor do depósito: ");
-        Double valor = sc.nextDouble();
-        if (valor <= 0) {
-            System.out.println("Valor precisa ser positivo e maior que zero!");
-            return;
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Qual valor do depósito: ");
+            Double valor = sc.nextDouble();
+            if (valor <= 0) {
+                System.out.println("Valor precisa ser positivo e maior que zero!");
+                return;
+            }
+            contaCliente.setSaldo(contaCliente.getSaldo() + valor);
         }
-        contaCliente.setSaldo(contaCliente.getSaldo() + valor);
         System.out.println("Depósito feito com sucesso!");
         verSaldo();
     }
 
     private Conta criarConta() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Email:");
-        String email = sc.nextLine();
-        System.out.println("Senha: ");
-        String senha = sc.nextLine();
-        return new Conta(email, senha, 0);
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Email:");
+            String email = sc.nextLine();
+            System.out.println("Senha: ");
+            String senha = sc.nextLine();
+            return new Conta(email, senha, 0);
+        }
     }
 
     public void cadastrarConta() {
